@@ -1,12 +1,13 @@
-import React, {Component} from 'react'
-import VideoListItem from './video_list_item'
+import React, {Component} from 'react';
+import VideoListItem from './video_list_item';
+import { connect } from 'react-redux';
+import actions from '../actions';
 
 const VideoList = ({videos, onVideoSelect}) => {
     let videoItems = videos.map(
     video => {
       return (
         <VideoListItem
-            onVideoSelect={onVideoSelect}
             key={video.etag}
             content={video} />
       )
@@ -14,9 +15,13 @@ const VideoList = ({videos, onVideoSelect}) => {
 
   return (
       <ul className='col-md-4 list-group'>
-        {videoItems}
+          {videoItems}
       </ul>
   );
 }
 
-export default VideoList;
+const mapStateToProps = (state) => ({
+    videos: state.videos
+});
+
+export default connect(mapStateToProps)(VideoList);

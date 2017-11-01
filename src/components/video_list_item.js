@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+import actions from '../actions';
+import { connect } from 'react-redux';
 
 const VideoListItem = ({content, onVideoSelect}) => {
   return(
@@ -11,11 +13,17 @@ const VideoListItem = ({content, onVideoSelect}) => {
                   <div className="media-heading">
                       {content.snippet.title}
                   </div>
+              </div>
           </div>
-        </div>
 
       </li>
   )
 }
 
-export default VideoListItem;
+const mapDispatchToProps = (dispatch) => ({
+    onVideoSelect: (video) => {
+        dispatch(actions.videoSelected(video));
+    }
+})
+
+export default connect(null, mapDispatchToProps)(VideoListItem);

@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import actions from '../actions';
+import YTSearch from 'youtube-api-search'
+const API_KEY = 'AIzaSyCxdovzJJDqel8q0vc3OkT54U_L1wLT1SE';
 
 class SearchBar extends Component{
   constructor(props){
@@ -33,4 +37,13 @@ class SearchBar extends Component{
   }
 }
 
-export default SearchBar;
+const mapDispatchToProps = (dispatch) => ({
+    onSearch: (term) => {
+        YTSearch({key: API_KEY, term}, (videos) => {
+          dispatch(actions.search(videos));
+        });
+    }
+})
+
+
+export default connect(null, mapDispatchToProps)(SearchBar);
