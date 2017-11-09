@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import actions from '../actions';
-import YTSearch from 'youtube-api-search'
-const API_KEY = 'AIzaSyCxdovzJJDqel8q0vc3OkT54U_L1wLT1SE';
+import YTSearch from 'youtube-api-search';
 
 class SearchBar extends Component{
   constructor(props){
@@ -30,18 +29,15 @@ class SearchBar extends Component{
       )
   }
 
-  onInputChange(event){
-    this.setState({
-        term: event.target.value
-    })
+  onInputChange(event) {
+      this.setState({term: event.target.value});
+      this.props.onSearch(event.target.value);
   }
 }
 
 const mapDispatchToProps = (dispatch) => ({
     onSearch: (term) => {
-        YTSearch({key: API_KEY, term}, (videos) => {
-          dispatch(actions.search(videos));
-        });
+      dispatch(actions.doSearch(term));
     }
 })
 

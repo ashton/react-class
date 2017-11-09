@@ -1,4 +1,4 @@
-import { SEARCH_HAPPENED, VIDEO_SELECTED } from './actions';
+import { SEARCH_DONE, VIDEO_SELECTED } from './actions';
 
 const defaultState = {
   videos: [],
@@ -7,7 +7,7 @@ const defaultState = {
 
 const videosReducer = (state = defaultState, action) => {
     switch (action.type) {
-        case SEARCH_HAPPENED:
+        case SEARCH_DONE:
 
             return {
                 ...state,
